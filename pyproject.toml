@@ -1,0 +1,33 @@
+[project]
+name = "bioimage-metadata-explorer"
+version = "0.1.0"
+description = "A Python toolkit for extracting, validating, and reporting biological image metadata."
+authors = [
+    {name = "Apekshya Kandel"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "numpy",
+    "pandas",
+    "tifffile",
+    "ome-types",
+    "lxml",
+    "rich",
+    "click"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "ruff",
+    "mypy"
+]
+
+[build-system]
+requires = [
+    "setuptools>=61"
+]
+build-backend = "setuptools.build_meta"
