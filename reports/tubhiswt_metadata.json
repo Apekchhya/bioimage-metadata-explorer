@@ -1,0 +1,26 @@
+{
+    "image": {
+        "image_id": "Image:0",
+        "size_x": 512,
+        "size_y": 512,
+        "size_c": 2,
+        "size_z": 1,
+        "size_t": 1
+    },
+    "channels": [
+        {
+            "id": "Channel:0:0",
+            "name": null
+        },
+        {
+            "id": "Channel:0:1",
+            "name": null
+        }
+    ],
+    "pixel_size": {
+        "pixel_size_x": null,
+        "pixel_size_y": null,
+        "pixel_size_x_unit": "UnitsLength.MICROMETER",
+        "pixel_size_y_unit": "UnitsLength.MICROMETER"
+    }
+}
