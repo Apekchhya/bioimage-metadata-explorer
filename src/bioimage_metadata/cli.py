@@ -37,7 +37,42 @@ def main():
     print("\nBioImage Metadata Report")
     print("========================")
 
-    print(report)
+    print("\nImage Information")
+    print("-----------------")
+
+    image = report["image"]
+
+    print(f"Image ID: {image['image_id']}")
+    print(f"Dimensions: {image['size_x']} × {image['size_y']}")
+    print(f"Channels: {image['size_c']}")
+    print(f"Z slices: {image['size_z']}")
+    print(f"Time points: {image['size_t']}")
+
+
+    print("\nChannel Information")
+    print("-------------------")
+
+    for channel in report["channels"]:
+        print(
+            f"{channel['id']} | "
+            f"Name: {channel['name']}"
+        )
+
+
+    print("\nPixel Information")
+    print("-----------------")
+
+    pixel = report["pixel_size"]
+
+    print(
+        f"Pixel size X: {pixel['pixel_size_x']} "
+        f"{pixel['pixel_size_x_unit']}"
+    )
+
+    print(
+        f"Pixel size Y: {pixel['pixel_size_y']} "
+        f"{pixel['pixel_size_y_unit']}"
+    )
 
     print("\nWarnings:")
 
