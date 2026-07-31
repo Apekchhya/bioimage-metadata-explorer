@@ -4,32 +4,29 @@ A Python-based tool for extracting, validating, and reporting metadata from OME-
 
 ## Overview
 
-Modern microscopy experiments generate large and complex image datasets. 
-Reliable metadata is essential for image interpretation, reproducibility, and data sharing.
+Modern microscopy experiments generate increasingly complex image datasets. 
+Accurate and complete metadata is essential for reproducible research, image interpretation, and long-term data sharing.
 
-BioImage Metadata Explorer provides a lightweight workflow to:
+BioImage Metadata Explorer provides a lightweight workflow for assessing bioimage metadata quality by extracting OME-XML metadata, standardizing image information, and identifying missing or incomplete fields.
 
-- Extract OME-XML metadata from OME-TIFF images
-- Parse image dimensions and channel information
-- Validate metadata completeness
-- Generate human-readable reports
-- Export structured JSON metadata
+The project explores concepts relevant to bioimage data management, metadata curation, and scientific data repositories.
 
+---
 
 ## Features
 
-✅ OME-TIFF metadata extraction  
-✅ OME-XML parsing using OME standards  
-✅ Image dimension analysis  
-✅ Channel metadata inspection  
-✅ Pixel calibration checking  
-✅ Metadata quality validation  
-✅ JSON report generation  
-✅ Command-line interface  
-✅ Automated testing with pytest  
+- Extract OME-XML metadata from OME-TIFF images
+- Parse image dimensions, channels, and pixel information
+- Validate metadata completeness
+- Classify missing metadata as errors or warnings
+- Generate human-readable CLI reports
+- Export structured JSON metadata
+- Automated testing using pytest
 
+---
 
 ## Workflow
+
 
 OME-TIFF Image
 |
@@ -37,67 +34,41 @@ OME-TIFF Image
 OME-XML Metadata Extraction
 |
 ↓
-Metadata Parser
+OME Metadata Parser
 |
 ↓
-Structured Metadata Report
+Structured Metadata Object
 |
 ↓
-Validation Engine
+Metadata Validation Engine
 |
 ↓
 CLI Report / JSON Output
 
 
+---
 
 ## Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/bioimage-metadata-explorer.git
+git clone https://github.com/Apekchhya/bioimage-metadata-explorer.git
 
 cd bioimage-metadata-explorer
 
-Create environment:
+Create a virtual environment:
 
 python -m venv .venv
+
 source .venv/bin/activate
 
-Install:
+Install dependencies:
+
 pip install -e .
-
 Usage
 
-Run:
-bioimage-report data/sample_images/tubhiswt_C0.ome.tif
-
-
-Example output:
-
-BioImage Metadata Report
-========================
-
-Image Information
------------------
-Image ID: Image:0
-Dimensions: 512 × 512
-Channels: 2
-Z slices: 1
-Time points: 1
-
-Validation
-----------
-
-Errors:
-- Missing metadata: pixel_size.pixel_size_x
-
-Warnings:
-- Missing metadata: channels[0].name
-
-Usage
-
-Run:
+Run the metadata report tool:
 
 bioimage-report data/sample_images/tubhiswt_C0.ome.tif
 
@@ -113,6 +84,7 @@ Dimensions: 512 × 512
 Channels: 2
 Z slices: 1
 Time points: 1
+
 
 Validation
 ----------
@@ -138,6 +110,23 @@ ome-types
 pytest
 JSON metadata standards
 OME-TIFF
-Motivation
+Scientific Motivation
 
-This project was developed to explore bioimage data management, metadata standards, and quality control workflows used in biological image repositories.
+This project was developed to gain practical experience with bioimage data standards and metadata quality assessment workflows.
+
+It focuses on challenges encountered in biological image repositories, including metadata extraction, validation, standardization, and reproducible data sharing.
+
+
+---
+
+```markdown
+## Relevance to Bioimage Data Management
+
+The project explores workflows related to:
+- OME data standards
+- metadata curation
+- image dataset quality control
+- structured biological data exchange
+- reproducible research workflows
+
+
