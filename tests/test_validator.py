@@ -1,23 +1,26 @@
-from bioimage_metadata.parser import (
-    extract_ome_metadata,
-    parse_ome_metadata,
-    analyze_image
-)
-
 from bioimage_metadata.validator import validate_metadata
 
 
-image = "data/sample_images/tubhiswt_C0.ome.tif"
+def test_missing_metadata_detection():
+
+    report = {
+        "image": {
+            "size_x": 512,
+            "size_y": 512
+        },
+        "channels": [
+            {
+                "name": None
+            }
+        ],
+        "pixel_size": {
+            "pixel_size_x": None
+        }
+    }
 
 
-xml = extract_ome_metadata(image)
-
-ome = parse_ome_metadata(xml)
-
-report = analyze_image(ome)
+    result = validate_metadata(report)
 
 
-warnings = validate_metadata(report)
-
-
-print(warnings)
+    assert len(result["errors"]) > 0
+    assert len(result["warnings"]) > 0

@@ -1,20 +1,38 @@
 from bioimage_metadata.parser import (
     extract_ome_metadata,
     parse_ome_metadata,
-    get_image_metadata,
-    get_channel_metadata,
-    get_pixel_size_metadata,
-    analyze_image
+    get_image_metadata
 )
 
 
-image = "data/sample_images/tubhiswt_C0.ome.tif"
+IMAGE = "data/sample_images/tubhiswt_C0.ome.tif"
 
 
-xml = extract_ome_metadata(image)
+def test_extract_ome_metadata():
 
-ome = parse_ome_metadata(xml)
+    xml = extract_ome_metadata(IMAGE)
 
-report = analyze_image(ome)
+    assert xml is not None
+    assert "<OME" in xml
 
-print(report)
+
+def test_parse_ome_metadata():
+
+    xml = extract_ome_metadata(IMAGE)
+
+    ome = parse_ome_metadata(xml)
+
+    assert ome is not None
+
+
+def test_image_metadata():
+
+    xml = extract_ome_metadata(IMAGE)
+
+    ome = parse_ome_metadata(xml)
+
+    metadata = get_image_metadata(ome)
+
+    assert metadata["size_x"] == 512
+    assert metadata["size_y"] == 512
+    assert metadata["size_c"] == 2

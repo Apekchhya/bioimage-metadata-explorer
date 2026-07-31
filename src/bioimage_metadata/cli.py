@@ -4,14 +4,9 @@ Command line interface for BioImage Metadata Explorer.
 
 import argparse
 
-from bioimage_metadata.parser import (
-    extract_ome_metadata,
-    parse_ome_metadata,
-    analyze_image
-)
+from black import validate_metadata
 
-from bioimage_metadata.validator import validate_metadata
-
+from bioimage_metadata.pipeline import generate_report
 
 def main():
 
@@ -26,11 +21,7 @@ def main():
 
     args = parser.parse_args()
 
-    xml = extract_ome_metadata(args.image)
-
-    ome = parse_ome_metadata(xml)
-
-    report = analyze_image(ome)
+    report = generate_report(args.image)
 
     warnings = validate_metadata(report)
 
@@ -73,14 +64,27 @@ def main():
         f"Pixel size Y: {pixel['pixel_size_y']} "
         f"{pixel['pixel_size_y_unit']}"
     )
+    print("\nValidation")
+    print("----------")
 
-    print("\nWarnings:")
+    validation = report["validation"]
 
-    if warnings:
-        for warning in warnings:
+    if validation["errors"]:
+        print("\nErrors:")
+
+        for error in validation["errors"]:
+            print("-", error)
+
+
+    if validation["warnings"]:
+        print("\nWarnings:")
+
+        for warning in validation["warnings"]:
             print("-", warning)
-    else:
-        print("No warnings")
+
+
+    if not validation["errors"] and not validation["warnings"]:
+        print("No issues found")
 
 
 if __name__ == "__main__":

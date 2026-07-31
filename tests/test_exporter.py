@@ -1,23 +1,18 @@
-from bioimage_metadata.parser import (
-    extract_ome_metadata,
-    parse_ome_metadata,
-    analyze_image
-)
+from pathlib import Path
 
-from bioimage_metadata.exporter import save_json
+from bioimage_metadata.pipeline import generate_report
 
 
-image = "data/sample_images/tubhiswt_C0.ome.tif"
+IMAGE = "data/sample_images/tubhiswt_C0.ome.tif"
 
 
-xml = extract_ome_metadata(image)
+def test_json_report_creation(tmp_path):
 
-ome = parse_ome_metadata(xml)
+    output = tmp_path / "report.json"
 
-report = analyze_image(ome)
+    generate_report(
+        IMAGE,
+        output
+    )
 
-
-save_json(
-    report,
-    "reports/tubhiswt_metadata.json"
-)
+    assert output.exists()

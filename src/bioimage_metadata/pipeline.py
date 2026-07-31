@@ -9,9 +9,7 @@ from bioimage_metadata.parser import (
 )
 
 from bioimage_metadata.validator import validate_metadata
-
 from bioimage_metadata.exporter import save_json
-
 
 
 def generate_report(image_path, output_file=None):
@@ -25,12 +23,9 @@ def generate_report(image_path, output_file=None):
 
     report = analyze_image(ome)
 
-    warnings = validate_metadata(report)
+    validation = validate_metadata(report)
 
-    report["validation"] = {
-        "warnings": warnings,
-        "status": "PASS" if not warnings else "WARNING"
-    }
+    report["validation"] = validation
 
     if output_file:
         save_json(report, output_file)

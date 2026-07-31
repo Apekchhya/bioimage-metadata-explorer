@@ -53,15 +53,34 @@ def find_missing_values(data, path=""):
 def validate_metadata(report):
     """
     Validate metadata completeness.
+
+    Returns
+    -------
+    dict
+        Errors and warnings.
     """
 
     missing_fields = find_missing_values(report)
 
+    errors = []
     warnings = []
 
     for field in missing_fields:
-        warnings.append(
-            f"Missing metadata: {field}"
-        )
 
-    return warnings
+        message = f"Missing metadata: {field}"
+
+        # Critical metadata
+        if "pixel_size" in field:
+            errors.append(message)
+
+        # Less critical metadata
+        elif "channels" in field:
+            warnings.append(message)
+
+        else:
+            warnings.append(message)
+
+    return {
+        "errors": errors,
+        "warnings": warnings
+    }
