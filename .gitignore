@@ -19,4 +19,6 @@ dist/
 build/
 *.egg-info/
 
+#Output files
 reports/
+output.zarr/

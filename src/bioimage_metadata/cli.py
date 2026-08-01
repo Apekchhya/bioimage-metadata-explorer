@@ -4,8 +4,6 @@ Command line interface for BioImage Metadata Explorer.
 
 import argparse
 
-from black import validate_metadata
-
 from bioimage_metadata.pipeline import generate_report
 
 def main():
@@ -19,11 +17,32 @@ def main():
         help="Path to OME-TIFF image"
     )
 
+    parser.add_argument(
+        "--output-file",
+        metavar="PATH",
+        help="Save the metadata report as JSON to PATH"
+    )
+
+    parser.add_argument(
+        "--to-zarr",
+        metavar="OUTPUT_PATH",
+        help="Also convert the image to OME-Zarr at OUTPUT_PATH"
+    )
+
+    parser.add_argument(
+        "--overwrite-zarr",
+        action="store_true",
+        help="Overwrite an existing OME-Zarr store at --to-zarr's path"
+    )
+
     args = parser.parse_args()
 
-    report = generate_report(args.image)
-
-    warnings = validate_metadata(report)
+    report = generate_report(
+        args.image,
+        output_file=args.output_file,
+        zarr_output=args.to_zarr,
+        overwrite_zarr=args.overwrite_zarr,
+    )
 
     print("\nBioImage Metadata Report")
     print("========================")
@@ -85,6 +104,16 @@ def main():
 
     if not validation["errors"] and not validation["warnings"]:
         print("No issues found")
+
+    if "zarr" in report:
+        print("\nOME-Zarr Conversion")
+        print("-------------------")
+
+        zarr_info = report["zarr"]
+
+        print(f"Output: {zarr_info['output_path']}")
+        print(f"Source axes: {zarr_info['source_axes']}")
+        print(f"Shape: {zarr_info['shape']}")
 
 
 if __name__ == "__main__":

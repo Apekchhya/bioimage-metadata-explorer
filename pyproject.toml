@@ -15,7 +15,8 @@ dependencies = [
     "ome-types",
     "lxml",
     "rich",
-    "click"
+    "click",
+    "ome-zarr"
 ]
 
 [project.optional-dependencies]
